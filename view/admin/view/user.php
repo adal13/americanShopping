@@ -44,8 +44,8 @@
                     </tr>
                 </tbody>
                 
-                <?php include "modal/edit.modal.php" ?>
-                <?php include "modal/delete.modal.php" ?>
+                <?php include "modal/modal_user/edit.modal.php" ?>
+                <?php include "modal/modal_user/delete.modal.php" ?>
 
             <?php }?>
             <?php }?>

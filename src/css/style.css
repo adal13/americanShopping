@@ -28,3 +28,10 @@
     margin-left: 0.5em;
   }
 }
+
+
+.navbar-logo {
+  width: 40px; /* Ajusta el ancho según tus necesidades */
+  height: 20px; /* Ajusta la altura según tus necesidades */
+  margin-right: 10px; /* Ajusta el margen derecho según tus necesidades */
+}

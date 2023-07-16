@@ -43,7 +43,7 @@
                     </tr>
                 </tbody>
                 
-                <?php include "modal/restore.modal.php" ?>
+                <?php include "modal/modal_user/restore.modal.php" ?>
 
             <?php }?>
             <?php }?>

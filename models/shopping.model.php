@@ -61,6 +61,70 @@ class americanShopping
         $stament->bindParam(":id_usuario", $id_usuario);
         return ($stament->execute()) ? true : false;
     }
-}
+//---------------------------------------------------------------------------------------------------------------------------
+    // Models product
+    public function showProductAmericanShopping()
+    {
+        $stament = $this->PDO->prepare("SELECT * FROM producto");
+        return ($stament->execute()) ? $stament->fetchAll() : false;
+    }
 
+    public function insertarProduct($id_categoria, $marca, $precio, $cantidad, $talla, $path_img)
+    {
+        $stament = $this->PDO->prepare("INSERT INTO producto VALUES(0, :id_categoria, :marca, :precio, :cantidad, :talla, 1, :path_img, now())");
+        $stament->bindParam(":id_categoria", $id_categoria);
+        $stament->bindParam(":marca", $marca);
+        $stament->bindParam(":precio", $precio);
+        $stament->bindParam(":cantidad", $cantidad);
+        $stament->bindParam(":talla", $talla);
+        $stament->bindParam(":path_img", $path_img);
+        return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
+    }
+
+    public function updateProduct($id_producto, $id_categoria, $marca, $precio, $talla, $path_img)
+    {
+        $stament = $this->PDO->prepare("UPDATE producto SET 
+                                                    id_categoria = :id_categoria, 
+                                                    marca = :marca,
+                                                    precio = :precio,
+                                                    talla = :talla,
+                                                    path_img = :path_img
+                                                    /* fecha_creacion = now(), */
+                                                    WHERE id_producto = :id_producto");
+
+        $stament->bindParam(":id_producto", $id_producto);
+        $stament->bindParam(":id_categoria", $id_categoria);
+        $stament->bindParam(":marca", $marca);
+        $stament->bindParam(":precio", $precio);
+        $stament->bindParam(":talla", $talla);
+        $stament->bindParam(":path_img", $path_img);
+
+        return ($stament->execute());
+    }
+
+    public function updateProducts($id_producto, $id_categoria, $marca, $precio, $talla)
+    {
+        $stament = $this->PDO->prepare("UPDATE producto SET 
+                                                    id_categoria = :id_categoria, 
+                                                    marca = :marca,
+                                                    precio = :precio,
+                                                    talla = :talla
+                                                    WHERE id_producto = :id_producto");
+
+        $stament->bindParam(":id_producto", $id_producto);
+        $stament->bindParam(":id_categoria", $id_categoria);
+        $stament->bindParam(":marca", $marca);
+        $stament->bindParam(":precio", $precio);
+        $stament->bindParam(":talla", $talla);
+
+        return ($stament->execute());
+    }
+
+    public function desactiveProduct($id_producto)
+    {
+        $stament = $this->PDO->prepare("UPDATE producto set status = 0 WHERE id_producto = :id_producto");
+        $stament->bindParam(":id_producto", $id_producto);
+        return ($stament->execute()) ? true : false;
+    }
+}
 ?>

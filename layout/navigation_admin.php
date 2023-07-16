@@ -32,11 +32,11 @@
                                         Categoria
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/nuevasColecciones.php">Nuevas Colecciones</a></li>
-                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/deportiva.php">Deportiva</a></li>
-                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/blusa.php">Blusas</a></li>
-                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/lenceria.php">Lenceria</a></li>
-                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/pantalones.php">Pantalones</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProduct&option=nuevas_colecciones">Nuevas Colecciones</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProduct&option=deportiva">Deportiva</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProduct&option=blusas">Blusas</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProduct&option=lenceria">Lenceria</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProduct&option=pantalones">Pantalones</a></li>
                                     </ul>
                                 </li>
         
@@ -65,10 +65,11 @@
                                 </li>
                             </ul>
                         </li>
+                        
                         <?php } elseif ($_SESSION['id_tipo_usuario'] == 2) { ?>                            
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                aria-expanded="false">
                                     Producto
                                 </a>
                                 <ul class="dropdown-menu">
@@ -134,7 +135,13 @@
                     </li>
                 <?php }?>
 
+                
             </ul>
+            <div>
+                <a class="nav-link active d-flex align-items-center" aria-current="page" href="<?php echo URL_RUTA?>/view/carrito_compra.php">
+                    <img src="<?php echo URL_IMG?>/logo/carrito_compra.png" class="navbar-logo" alt="Logo Carrito de Compras">
+                </a>
+            </div>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

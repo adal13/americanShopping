@@ -10,6 +10,6 @@ define('URL_RUTA_USER', $local.'americanShoping/view/user');
 
 //Ruta para estilos
 define('URL_CSS', $local.'americanShoping/src/css');
-define('URL_IMG', $local.'americanShoping/src/img');
+define('URL_IMG', $local.'americanShoping/src/img/');
 
 ?>
