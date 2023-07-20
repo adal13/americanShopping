@@ -43,6 +43,25 @@ if (isset($_GET['request'])) {
         // echo "Probando ";
     }
 
+    if($_GET['request'] == 'shopping_car'){
+        $con->shopping();
+    }
+    
+    if($_GET['request']== 'borrarCarro'){
+        $con->borrarCarro();
+    }
+
+    if($_GET['request'] == 'showCar'){
+        $con->showCarController();
+    }
+    if($_GET['request'] == 'savedata'){
+        $con->saveDataCarBuy();
+    }
+
+    if($_GET['request'] == 'filter'){
+        $con->filter();
+    }
+
 }
 
 //echo "conectando al controlador";
@@ -141,7 +160,6 @@ class ShoppingController
     public function showProducto()
     {
         header("Location: ../index.php");
-        
     }
 
     public function showProductAmericanController()
@@ -152,7 +170,7 @@ class ShoppingController
             // Realiza una acción específica para la opción "Nuevas Colecciones"
             $res = $this->model->showProductAmericanShopping();
             
-            $_SESSION['data'] = $res;
+            $_SESSION['showAmerican'] = $res;
             
             print_r($res);
             header('Location: ../view/admin/view/product/category/nuevasColecciones.php');
@@ -160,7 +178,7 @@ class ShoppingController
         } elseif ($option == 'deportiva') {
             $res = $this->model->showProductAmericanShopping();
             
-            $_SESSION['data'] = $res;
+            $_SESSION['showAmerican'] = $res;
             
             print_r($res);
             // Realiza una acción específica para la opción "Deportiva"
@@ -168,14 +186,14 @@ class ShoppingController
         } elseif ($option == 'blusas') {
             $res = $this->model->showProductAmericanShopping();
             
-            $_SESSION['data'] = $res;
+            $_SESSION['showAmerican'] = $res;
             
             print_r($res);
             header('Location: ../view/admin/view/product/category/blusa.php');
         } elseif ($option == 'lenceria') {
             $res = $this->model->showProductAmericanShopping();
             
-            $_SESSION['data'] = $res;
+            $_SESSION['showAmerican'] = $res;
             
             print_r($res);
             // Realiza una acción específica para la opción "Lenceria"
@@ -183,7 +201,7 @@ class ShoppingController
         } elseif ($option == 'pantalones') {
             $res = $this->model->showProductAmericanShopping();
             
-            $_SESSION['data'] = $res;
+            $_SESSION['showAmerican'] = $res;
             
             print_r($res);
             // Realiza una acción específica para la opción "Pantalones"
@@ -226,11 +244,12 @@ class ShoppingController
         $id_categoria = $_POST['id_categoria'];
         $marca = $_POST['marca'];
         $precio = $_POST['precio'];
+        $cantidad = $_POST['cantidad'];
         $talla = $_POST['talla'];
         
         if ($_FILES['path_img']['error'] === UPLOAD_ERR_NO_FILE) {
             // No se seleccionó una nueva imagen, no hay cambios en la imagen existente
-            $res = $this->model->updateProducts($id_producto, $id_categoria, $marca, $precio, $talla);
+            $res = $this->model->updateProducts($id_producto, $id_categoria, $marca, $precio, $cantidad, $talla);
         
                 if ($res) {
                     $con = new ShoppingController();
@@ -268,6 +287,112 @@ class ShoppingController
             $con = new ShoppingController();
             //echo "la consulta se reealizo satisfactoriamente";
             $con->showProducto();
+        }
+    }
+
+//--------------------------------------------------------------------------------------------------------
+    public function showCarController()
+    {
+        $res = $this->model->showCar();
+        
+        $_SESSION['showCar'] = $res;
+        
+        print_r($res);
+
+        header('Location: ../view/admin/view/user.php');
+    }
+
+    public function shopping(){
+        $cantidadProductosCarrito = 0;
+        if (isset($_SESSION['carrito'])) {
+            foreach ($_SESSION['carrito'] as $producto) {
+                if (!empty($producto)) {
+                    $cantidadProductosCarrito += 1;
+                }
+            }
+        }
+        // session_start(); 
+        if(isset($_SESSION['carrito'])){
+            $carrito_mio=$_SESSION['carrito'];
+            if(isset($_POST['marca'])){
+                $id_producto=$_POST['id_producto'];
+                $titulo=$_POST['marca'];
+                $precio=$_POST['precio'];
+                $cantidad=$_POST['cantidad'];
+                $num=0;
+                $carrito_mio[]=array("id_producto"=>$id_producto,"marca"=>$titulo,"precio"=>$precio,"cantidad"=>$cantidad);
+                header("Location: ".$_SERVER['HTTP_REFERER']."");
+            }
+        }else{
+            $id_producto=$_POST['id_producto'];
+            $titulo=$_POST['marca'];
+            $precio=$_POST['precio'];
+            $cantidad=$_POST['cantidad'];
+            $carrito_mio[]=array("id_producto"=>$id_producto,"marca"=>$titulo,"precio"=>$precio,"cantidad"=>$cantidad);	
+            header("Location: ".$_SERVER['HTTP_REFERER']."");
+        }
+        
+    
+        $_SESSION['carrito']=$carrito_mio;
+        print_r($carrito_mio);
+    }
+
+    public function obtenerProductoPorIDController($id_producto) {        
+        $producto = $this->model->obtenerProductosCarrito($id_producto);
+        return $producto;
+    }
+
+    public function borrarCarro(){
+        //session_start(); 
+        if (isset($_SESSION['carrito'])) {
+            $_SESSION['carrito']=  null;
+        }
+        header("Location: ".$_SERVER['HTTP_REFERER']."");
+    }
+
+    public function saveDataCarBuy(){
+        $data = $_SESSION['carrito'];
+        $id_usuario = $_SESSION['id_usuario'];
+
+        foreach ($data as $valor) {
+            $id_producto = $valor['id_producto'];
+            $cantidad = 1;
+            $total = $valor['precio'];
+            
+            $res = $this->model->insertCar($id_usuario, $id_producto, $cantidad, $total);
+    
+            if ($res) {
+                $con = new ShoppingController();
+                $con->showAmericanHome();
+                if (isset($_SESSION['carrito'])) {
+                    $_SESSION['carrito']=  null;
+                }
+                header("Location: ".$_SERVER['HTTP_REFERER']."");
+                // header('Location: ../view/admin/view/product/category/nuevasColecciones.php');
+            }
+        }
+
+    }
+
+    public function filter(){
+
+        if (isset($_GET['from_date']) && isset($_GET['to_date'])) {
+            $fromDate = $_GET['from_date'];
+            $toDate = $_GET['to_date'];
+
+            $_SESSION['from_data'] = $fromDate;
+            $_SESSION['to_date'] = $toDate;
+
+            $res = $this->model->filterReport($fromDate, $toDate);
+
+            $_SESSION['filter'] = $res;
+            
+            print_r($res);
+            header('Location: ../view/admin/reporte.php');
+            exit;
+        } else {
+            $_SESSION['filter'] = array();
+            print_r($_SESSION['filter']);
         }
     }
 

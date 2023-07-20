@@ -1,7 +1,7 @@
 <?php include "layout/head.php"; ?>
 <?php include "layout/navigation_admin.php" ?>
 
-<!-- <div class="container">
+<div class="container">
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -43,6 +43,6 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-</div> -->
+</div>
 
 <?php include "layout/footer.php"; ?>

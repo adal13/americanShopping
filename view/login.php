@@ -5,7 +5,7 @@
         <div class="card card-body mt-5 mb-5" >
             <div class="modal-header" >
                 <h1 class="text-center">Login</h1>
-                <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" href="<?php echo URL_RUTA?>/index.php"></a>
+                <a type="button" class="btn-close" href="<?php echo URL_RUTA ?>/index.php"></a>
             </div>
             <form action="<?php echo URL_RUTA?>/config/validate.php" method="post" class="mt-5">
                 <div class="mb-3">
@@ -21,6 +21,7 @@
                     <label class="form-check-label" for="exampleCheck1">Recuerdame</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Iniciar</button>
+                <a class="nav-link text-center" href="<?php echo URL_RUTA?>/view/create_account.php" type="button">Crear Cuenta Nueva</a>
             </form>
         </div>
     </div>

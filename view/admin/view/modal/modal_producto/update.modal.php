@@ -69,6 +69,11 @@
                             <input type="number" name="precio" class="form-control" value="<?php echo $shopping['precio'] ?>" required>
                         </div>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Cantidad</label>
+                        <input type="text" name="cantidad" class="form-control" id="recipient-name" value="<?php echo $shopping['cantidad'];?>" required>
+                    </div>
                     
                     <div class="row-cols-sm-1 mb-3">
                         <label class="form-label">talla</label>

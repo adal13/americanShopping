@@ -1,5 +1,16 @@
 <?php session_start(); ?>
 
+<?php 
+$cantidadProductosCarrito = 0;
+if(isset($_SESSION['carrito'])) {
+    foreach ($_SESSION['carrito'] as $producto) {
+        if (!empty($producto)) {
+            $cantidadProductosCarrito += 1;
+        }
+    }
+}
+?>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="#"> </a>
@@ -118,10 +129,19 @@
                 <?php }?>
 
                 <li class="nav-item">
-                    <a class="nav-link" onclick="know_us()" href="<?php echo URL_RUTA_ADMIN?>/view/know_us.php">Quienes Somos</a>
+                    <a class="nav-link" href="<?php echo URL_RUTA_ADMIN?>/view/know_us.php">Quienes Somos</a>
                 </li>
 
+                    <li class="nav-item">
+                        <!-- <a class="nav-link" href="<?php echo URL_RUTA_ADMIN?>/fpdf/reporte.php" target="_black" >Reporte</a> -->
+                        <a class="nav-link" href="<?php echo URL_RUTA_ADMIN?>/reporte.php">Reporte</a>
+                        <!-- <a class="nav-link" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=filter">Reporte</a> -->
+                        <!-- <a class="nav-link" href="
+                        <?php echo URL_RUTA?>/controllers/shopping.controller.php?request=filter">Reporte</a> -->
+                    </li>
+                
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
+
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL_RUTA?>/config/sign_off.php">Cerrar Sesion</a>
                     </li>
@@ -130,18 +150,42 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL_RUTA?>/view/login.php">Iniciar Sesion</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URL_RUTA?>/view/create_account.php">Crear Una Cuenta</a>
-                    </li>
                 <?php }?>
 
                 
             </ul>
-            <div>
-                <a class="nav-link active d-flex align-items-center" aria-current="page" href="<?php echo URL_RUTA?>/view/carrito_compra.php">
+
+            <!-- <div>
+                <a class="nav-link active d-flex align-items-center" aria-current="page" data-bs-toggle="modal" data-bs-target="#modal_cart">
                     <img src="<?php echo URL_IMG?>/logo/carrito_compra.png" class="navbar-logo" alt="Logo Carrito de Compras">
                 </a>
-            </div>
+            </div> -->
+
+            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
+                    <?php if ($_SESSION['id_tipo_usuario'] == 1) { ?>
+                        <div>
+                            <button type="button" class="nav-link active d-flex align-items-center" aria-current="page" data-bs-toggle="modal" data-bs-target="#modal_cart">
+                                <?php echo $cantidadProductosCarrito; ?>
+                                <img src="<?php echo URL_IMG?>/logo/carrito_compra.png" class="navbar-logo" alt="Logo Carrito de Compras">
+                            </button>
+                        </div>
+            
+                    <?php } elseif ($_SESSION['id_tipo_usuario'] == 2) { ?>
+                        
+                        <div>
+                            <button type="button" class="nav-link active d-flex align-items-center" aria-current="page" data-bs-toggle="modal" data-bs-target="#modal_cart">
+                                <?php echo $cantidadProductosCarrito; ?>
+                                <img src="<?php echo URL_IMG?>/logo/carrito_compra.png" class="navbar-logo" alt="Logo Carrito de Compras">
+                            </button>
+                        </div>
+                    <?php } else{ 
+                        echo "No puedes guardar este producto";
+                    }?>
+            <?php }?>
+
+            <?php // include "../view/carrito_compra.php" ?>
+            <?php include "C:/xampp/htdocs/americanShoping/view/carrito_compra.php"; ?>
+            
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

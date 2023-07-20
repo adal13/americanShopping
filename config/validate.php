@@ -43,7 +43,7 @@ if ($connection instanceof PDO) {
 
         if ($status == 1){
             if ($catusr == 1) {
-                $pagina = URL_RUTA_ADMIN.'/index.php';
+                $pagina = URL_RUTA.'/index.php';
     
                 $_SESSION['id_usuario'] = $uid;
                 $_SESSION['id_tipo_usuario'] = $catusr;
@@ -52,7 +52,7 @@ if ($connection instanceof PDO) {
     
                 echo "<script>location.replace('" . $pagina . "');</script>";
             } elseif ($catusr == 2) {
-                $pagina = URL_RUTA_USER.'/index.php';
+                $pagina = URL_RUTA.'/index.php';
         
                 $_SESSION['id_usuario'] = $uid;
                 $_SESSION['id_tipo_usuario'] = $catusr;

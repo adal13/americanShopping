@@ -5,7 +5,7 @@
         <div class="card card-body mt-5 mb-5" >
             <div class="modal-header" >
                 <h1 class="text-center">Login</h1>
-                <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" href="<?php echo URL_RUTA?>/index.php"></a>
+                <a type="button" class="btn-close" href="<?php echo URL_RUTA?>/index.php"></a>
             </div>
             <form action="../controllers/shopping.controller.php?request=insert" method="post" class="mt-5">
                 <div class="mb-3">
