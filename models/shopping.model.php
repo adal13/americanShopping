@@ -202,7 +202,8 @@ class americanShopping
         INNER JOIN tipo_usuario ON tipo_usuario.id_tipo_usuario = users.id_tipo_usuario
         INNER JOIN producto ON venta.id_producto = producto.id_producto
         INNER JOIN categoria ON producto.id_categoria = categoria.id_categoria 
-        WHERE fecha_venta BETWEEN :from_date AND :to_date");
+        WHERE fecha_venta BETWEEN :from_date AND :to_date
+        ORDER BY venta.id_venta DESC");
 
         // $stmt = $this->PDO->prepare($stament);
         $stament->bindParam(':from_date', $fromDate);

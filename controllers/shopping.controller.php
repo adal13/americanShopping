@@ -30,6 +30,10 @@ if (isset($_GET['request'])) {
         $con->showProductAmericanController();
     }
 
+    if ($_GET['request'] == 'listProductUser') {
+        $con->showProductAmericanControllerUser();
+    }
+
     if($_GET['request'] == 'insertImg'){
         $con->insertImg();
     }
@@ -206,6 +210,54 @@ class ShoppingController
             print_r($res);
             // Realiza una acción específica para la opción "Pantalones"
             header('Location: ../view/admin/view/product/category/pantalones.php');
+        }
+
+    }
+
+    public function showProductAmericanControllerUser()
+    {
+        $option = $_GET['option'];
+    
+        if ($option == 'nuevas_colecciones') {
+            // Realiza una acción específica para la opción "Nuevas Colecciones"
+            $res = $this->model->showProductAmericanShopping();
+            
+            $_SESSION['showAmerican'] = $res;
+            
+            print_r($res);
+            header('Location: ../view/user/view/product/category/nuevasColecciones.php');
+
+        } elseif ($option == 'deportiva') {
+            $res = $this->model->showProductAmericanShopping();
+            
+            $_SESSION['showAmerican'] = $res;
+            
+            print_r($res);
+            // Realiza una acción específica para la opción "Deportiva"
+            header('Location: ../view/user/view/product/category/deportiva.php');
+        } elseif ($option == 'blusas') {
+            $res = $this->model->showProductAmericanShopping();
+            
+            $_SESSION['showAmerican'] = $res;
+            
+            print_r($res);
+            header('Location: ../view/user/view/product/category/blusa.php');
+        } elseif ($option == 'lenceria') {
+            $res = $this->model->showProductAmericanShopping();
+            
+            $_SESSION['showAmerican'] = $res;
+            
+            print_r($res);
+            // Realiza una acción específica para la opción "Lenceria"
+            header('Location: ../view/user/view/product/category/lenceria.php');
+        } elseif ($option == 'pantalones') {
+            $res = $this->model->showProductAmericanShopping();
+            
+            $_SESSION['showAmerican'] = $res;
+            
+            print_r($res);
+            // Realiza una acción específica para la opción "Pantalones"
+            header('Location: ../view/user/view/product/category/pantalones.php');
         }
 
     }

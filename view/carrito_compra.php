@@ -1,5 +1,5 @@
 <?php
-    $carrito_mio = $_SESSION['carrito'];
+    $carrito_mio = $_SESSION['carrito'] ?? [];
     $_SESSION['carrito'] = $carrito_mio;
 
     $carrito_mio = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];

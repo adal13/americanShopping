@@ -11,24 +11,26 @@ if(isset($_SESSION['carrito'])) {
 }
 ?>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="#"> </a>
+        <a class="navbar-brand fw-bold" href="#">American Shopping</a>
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?php echo URL_RUTA?>/index.php">Inicio</a>
+                    <a class="nav-link" aria-current="page" href="<?php echo URL_RUTA?>/index.php">Inicio</a>
                 </li>
                 
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
                     <?php if ($_SESSION['id_tipo_usuario'] == 1) { ?>
                         
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listUser">Usuarios</a>
+                            <a class="nav-link" aria-current="page" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listUser">Usuarios</a>
                         </li>
                         
                         <li class="nav-item dropdown">
@@ -50,30 +52,6 @@ if(isset($_SESSION['carrito'])) {
                                         <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProduct&option=pantalones">Pantalones</a></li>
                                     </ul>
                                 </li>
-        
-                                <li class="nav-item dropend">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        Marca
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/marca/disney.php">Disney</a></li>
-                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/marca/adidas.php">Adidas</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li class="nav-item dropend">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                Dropdown
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
                             </ul>
                         </li>
                         
@@ -90,36 +68,12 @@ if(isset($_SESSION['carrito'])) {
                                             Categoria
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/nuevasColecciones.php">Nuevas Colecciones</a></li>
-                                            <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/deportiva.php">Deportiva</a></li>
-                                            <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/blusa.php">Blusas</a></li>
-                                            <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/lenceria.php">Lenceria</a></li>
-                                            <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/category/pantalones.php">Pantalones</a></li>
-                                        </ul>
-                                    </li>
-            
-                                    <li class="nav-item dropend">
-                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            Marca
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/marca/disney.php">Disney</a></li>
-                                            <li><a class="dropdown-item" href="<?php echo URL_RUTA_ADMIN?>/view/product/marca/adidas.php">Adidas</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li class="nav-item dropend">
-                                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                    Dropdown
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProductUser&option=nuevas_colecciones">Nuevas Colecciones</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProductUser&option=deportiva">Deportiva</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProductUser&option=blusas">Blusas</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProductUser&option=lenceria">Lenceria</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=listProductUser&option=pantalones">Pantalones</a></li>
+                                    </ul>
                                     </li>
                                 </ul>
                             </li>
@@ -132,16 +86,13 @@ if(isset($_SESSION['carrito'])) {
                     <a class="nav-link" href="<?php echo URL_RUTA_ADMIN?>/view/know_us.php">Quienes Somos</a>
                 </li>
 
-                    <li class="nav-item">
-                        <!-- <a class="nav-link" href="<?php echo URL_RUTA_ADMIN?>/fpdf/reporte.php" target="_black" >Reporte</a> -->
-                        <a class="nav-link" href="<?php echo URL_RUTA_ADMIN?>/reporte.php">Reporte</a>
-                        <!-- <a class="nav-link" href="<?php echo URL_RUTA?>/controllers/shopping.controller.php?request=filter">Reporte</a> -->
-                        <!-- <a class="nav-link" href="
-                        <?php echo URL_RUTA?>/controllers/shopping.controller.php?request=filter">Reporte</a> -->
-                    </li>
                 
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
-
+                    <?php if ($_SESSION['id_tipo_usuario'] == 1) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo URL_RUTA_ADMIN?>/reporte.php">Reporte</a>
+                        </li>
+                    <?php }?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL_RUTA?>/config/sign_off.php">Cerrar Sesion</a>
                     </li>

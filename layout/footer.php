@@ -17,14 +17,15 @@
 
 <!-- <script src="http://localhost/americanShoping/src/js/redirect-js.js"></script> -->
 
-<!-- <script src="http://localhost/americanShoping/src/js/popper.min.js"></script>
-<script src="http://localhost/americanShoping/src/js/redirection.js" ></script> -->
+<!-- <script src="http://localhost/americanShoping/src/js/popper.min.js"></script> -->
+<!-- <script src="http://localhost/americanShoping/src/js/redirection.js" ></script> -->
 <!-- <script src="http://localhost/americanShoping/src/js/redirect-css.js"></script> -->
 <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script> -->
+<script src="http://localhost/americanShoping/src/js/jquery.min.js"></script>
 
 <script src="http://localhost/americanShoping/src/js/bootstrap/bootstrap.min.js"></script>
-<!-- <script src="http://localhost/americanShoping/src/js/bookstores/popper.min.js"></script> -->
-<!-- <script src="http://localhost/americanShoping/src/js/bootstrap/bootstrap.bundle.js"></script> -->
+<script src="http://localhost/americanShoping/src/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="http://localhost/americanShoping/src/js/popper.min.js"></script>
 
 </body>
 

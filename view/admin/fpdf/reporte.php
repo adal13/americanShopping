@@ -112,7 +112,8 @@ INNER JOIN users ON venta.id_usuario = users.id_usuario
 INNER JOIN tipo_usuario ON tipo_usuario.id_tipo_usuario = users.id_tipo_usuario
 INNER JOIN producto ON venta.id_producto = producto.id_producto
 INNER JOIN categoria ON producto.id_categoria = categoria.id_categoria 
-WHERE fecha_venta BETWEEN '$fromDate' AND '$toDate'");
+WHERE fecha_venta BETWEEN '$fromDate' AND '$toDate'
+ORDER BY venta.id_venta ASC");
 
 while ($datos_reporte = $consulta_reporte_usuario->fetch(PDO::FETCH_OBJ)) {      
    $i = $i + 1;
