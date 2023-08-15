@@ -1,6 +1,7 @@
 <?php include "layout/head.php"; ?>
 <?php include "layout/navigation_admin.php" ?>
 
+
 <div class="container">
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-indicators">

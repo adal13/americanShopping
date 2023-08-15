@@ -10,15 +10,37 @@ class americanShopping
         $this->PDO = $con->conexion();
     }
 
+    public function userExists($username) {
+        $sql = "SELECT COUNT(*) FROM users WHERE username = :username";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+        
+        return ($count > 0);
+    }
+
     public function insertar($nombre, $apellido, $email, $username, $password)
     {
-        $stament = $this->PDO->prepare("INSERT INTO users VALUES(0,:nombre, :apellido, 2, :email, :username, :password, 1, now())");
-        $stament->bindParam(":nombre", $nombre);
-        $stament->bindParam(":apellido", $apellido);
-        $stament->bindParam(":email", $email);
-        $stament->bindParam(":username", $username);
-        $stament->bindParam(":password", $password);
-        return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
+
+        // $sql_valid = "SELECT * FROM users WHERE username = :username";
+        // $stmt_valid = $this->PDO->prepare($sql_valid);
+        // $stmt_valid->bindParam(':username', $username);
+        // $stmt_valid->execute();
+        // $user = $stmt_valid->fetch(PDO::FETCH_ASSOC);
+
+        // if($user){
+        //     return false;
+        // }else{
+            $stament = $this->PDO->prepare("INSERT INTO users VALUES(0,:nombre, :apellido, 2, :email, :username, :password, 1, now())");
+            $stament->bindParam(":nombre", $nombre);
+            $stament->bindParam(":apellido", $apellido);
+            $stament->bindParam(":email", $email);
+            $stament->bindParam(":username", $username);
+            $stament->bindParam(":password", $password);
+            return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
+        // }
+
     }
 
     public function showAmericanShopping()

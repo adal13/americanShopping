@@ -16,7 +16,7 @@ if (isset($_GET['request'])) {
         // echo "Probando ";
     }
     
-    if ($_GET['request'] == 'insert') {
+    if ($_GET['request'] == 'insertar') {
         $con->insert();
     }
 
@@ -90,12 +90,42 @@ class ShoppingController
         $email = $_POST['email'];
         $username = $_POST['username'];
         $password = $_POST['password'];
+        $validate_password = $_POST['validate_password'];
 
-        $res = $this->model->insertar($nombre, $apellido, $email, $username, $password);
-
-        if ($res) {
-            $con = new ShoppingController();
-            $con->showAmericanHome();
+        if($password === $validate_password){
+            if (preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/', $password)) {
+                if($this->model->userExists($username)){
+                    echo "<script> 
+                        alert('Usuario " . $username . " ya existe'); 
+                        window.location = '../view/create_account.php' 
+                    </script>";
+                }else{
+                    $res = $this->model->insertar($nombre, $apellido, $email, $username, $password);
+            
+                    if ($res === false) {
+                        echo "<script> 
+                                alert('Hubo un error en la inserción'); 
+                                window.location = '../view/create_account.php' 
+                            </script>";
+                    } else if ($res) {
+                        $_SESSION['loggedin'] = true;
+                        $_SESSION['id_tipo_usuario'] = 2;
+                        $_SESSION['username'] = $username;
+                        $_SESSION['password'] = $password;
+                        header("Location: ../index.php");
+                        exit();
+                        // $con = new ShoppingController();
+                        // $con->showAmericanHome();
+                    } else {
+                        
+                    }
+                }
+            } else {
+                echo "La contraseña no cumple con los requisitos de seguridad.";
+                header('Location: ../view/create_account.php');
+            }
+        }else{
+            echo "La contraseña no coincide.";
         }
     }
 
@@ -177,6 +207,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewAdmin'] = 'nuevasColecciones';
             header('Location: ../view/admin/view/product/category/nuevasColecciones.php');
 
         } elseif ($option == 'deportiva') {
@@ -185,6 +216,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewAdmin'] = 'deportiva';
             // Realiza una acción específica para la opción "Deportiva"
             header('Location: ../view/admin/view/product/category/deportiva.php');
         } elseif ($option == 'blusas') {
@@ -193,6 +225,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewAdmin'] = 'blusas';
             header('Location: ../view/admin/view/product/category/blusa.php');
         } elseif ($option == 'lenceria') {
             $res = $this->model->showProductAmericanShopping();
@@ -200,6 +233,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewAdmin'] = 'lenceria';
             // Realiza una acción específica para la opción "Lenceria"
             header('Location: ../view/admin/view/product/category/lenceria.php');
         } elseif ($option == 'pantalones') {
@@ -208,6 +242,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewAdmin'] = 'pantalones';
             // Realiza una acción específica para la opción "Pantalones"
             header('Location: ../view/admin/view/product/category/pantalones.php');
         }
@@ -225,6 +260,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewUser'] = 'nuevasColecciones';
             header('Location: ../view/user/view/product/category/nuevasColecciones.php');
 
         } elseif ($option == 'deportiva') {
@@ -233,6 +269,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewUser'] = 'deportiva';
             // Realiza una acción específica para la opción "Deportiva"
             header('Location: ../view/user/view/product/category/deportiva.php');
         } elseif ($option == 'blusas') {
@@ -241,6 +278,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewUser'] = 'blusas';
             header('Location: ../view/user/view/product/category/blusa.php');
         } elseif ($option == 'lenceria') {
             $res = $this->model->showProductAmericanShopping();
@@ -248,6 +286,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewUser'] = 'lenceria';
             // Realiza una acción específica para la opción "Lenceria"
             header('Location: ../view/user/view/product/category/lenceria.php');
         } elseif ($option == 'pantalones') {
@@ -256,6 +295,7 @@ class ShoppingController
             $_SESSION['showAmerican'] = $res;
             
             print_r($res);
+            $_SESSION['viewUser'] = 'pantalones';
             // Realiza una acción específica para la opción "Pantalones"
             header('Location: ../view/user/view/product/category/pantalones.php');
         }

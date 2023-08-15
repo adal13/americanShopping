@@ -26,6 +26,7 @@
 <script src="http://localhost/americanShoping/src/js/bootstrap/bootstrap.min.js"></script>
 <script src="http://localhost/americanShoping/src/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="http://localhost/americanShoping/src/js/popper.min.js"></script>
+<script src="http://localhost/americanShoping/src/js/script.js"></script>
 
 </body>
 

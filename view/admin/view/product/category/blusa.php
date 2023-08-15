@@ -23,7 +23,7 @@ if (isset($_SESSION['showAmerican']) && is_array($_SESSION['showAmerican'])) {
 
                                 <div class="card border-primary">
                                     <div class="image-container">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#updateImagen<?php echo $shopping['id_producto']; ?>"><img class="mt-3" src="<?php echo URL_IMG.$shopping['path_img']?>" style="width: 50%;" height="50px" alt="Producto"></a>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#updateImagen<?php echo $shopping['id_producto'];?>"><img class="mt-3" src="<?php echo URL_IMG.$shopping['path_img']?>" style="width: 50%;" height="50px" alt="Producto"></a>
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">
